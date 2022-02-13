@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  payrolldb:
+    container_name: payrolldb
+    image: postgres:11
+    environment:
+      POSTGRES_DB: payrolldb
+      POSTGRES_USER: payrolluser
+      POSTGRES_PASSWORD: averylonglongpasswordtotype
+    ports:
+    - 6010:5432/tcp
+    volumes:
+    - payrolldb:/var/lib/postgresql/data
+
+  payroll:
+    container_name: payroll
+    image: gabriel/payroll
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:6010/payrolldb
+      SPRING_DATASOURCE_USERNAME: payrolluser
+      SPRING_DATASOURCE_PASSWORD: averylonglongpasswordtotype
+
+volumes:
+  payrolldb:
+
+# docker run --name payrolldb -p 5432:5432 -e POSTGRES_DB=payrolldb -e POSTGRES_USER=payrolluser -e POSTGRES_PASSWORD=averylonglongpasswordtotype -d postgres:11

@@ -1,0 +1,32 @@
+project:
+  version: @version@
+
+server:
+  port: 8080
+  error:
+    whitelabel:
+      enabled: true
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${PGHOST:localhost}:${PGPORT:5432}/${PGDATABASE:payrolldb}
+    username: ${PGUSER:payrolluser}
+    password: ${PGPASSWORD:averylonglongpasswordtotype}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      show-sql: true
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format-sql: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+#  web:
+#    resources:
+#      add-mappings: false
+
+jwt:
+  secret: mario@alsohastotakepillsforpainLikemaXpayne
+
